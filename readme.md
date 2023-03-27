@@ -1,7 +1,7 @@
 # Extended Set
 
-Extended Set is a Set Data structure with extended functionalities .
-Its role is to elegantly handle situations that can generate an error.
+Extended Set is a Set Data structure with extended functionalities.
+They implements map, reduce and filter functions. In addiction, provides methods to handle Set basic operations.
 
 ## map
 
