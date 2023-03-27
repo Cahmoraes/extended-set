@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports, "__esModule", {value: true});var a=class extends Set{filter(l){let t=new a;for(let e of this)l(e)&&t.add(e);return t}reduce(...l){let[t,e]=l;if(r()){let[i,...n]=this;return c(n,i)}return c(this,e);function r(){return e==null}function c(i,n){let u=n;for(let T of i)u=t(u,T);return u}}map(l){let t=new a;for(let e of this)t.add(l(e));return t}};exports.default = a;
+//# sourceMappingURL=index.js.map

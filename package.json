@@ -1,0 +1,42 @@
+{
+  "name": "@cahmoraes93/extended-set",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "author": "Cahmoraes <ike.moraes93@gmail.com>",
+  "keywords": [
+    "functional programming"
+  ],
+  "description": "This package implements The Monad Either",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Cahmoraes/extended-set"
+  },
+  "scripts": {
+    "test": "npx vitest run",
+    "test:watch": "npx vitest",
+    "test:cov": "npx vitest --coverage",
+    "build": "tsup --format esm,cjs",
+    "dev": "npx tsx"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.19.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.1",
+    "@typescript-eslint/parser": "^5.36.1",
+    "@vitest/coverage-c8": "^0.29.7",
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "tsup": "^6.2.3",
+    "typescript": "^5.0.2",
+    "vitest": "^0.29.7"
+  },
+  "dependencies": {
+    "tsx": "^3.12.6"
+  }
+}
