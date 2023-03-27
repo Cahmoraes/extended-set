@@ -7,7 +7,7 @@
   "keywords": [
     "functional programming"
   ],
-  "description": "This package implements The Monad Either",
+  "description": "This package create a Set with extended functionalities",
   "publishConfig": {
     "access": "public"
   },
