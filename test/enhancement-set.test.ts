@@ -56,7 +56,7 @@ describe('EnhancementSet', () => {
     expect(result).toBeFalsy()
   })
 
-  it('should return an union of Sets', () => {
+  it('should return an union of 2 Sets', () => {
     const numbers_1 = [1, 2, 3, 4]
     const numbers_2 = [5, 6, 7, 8]
     const set_1 = new ExtendedSet<number>(numbers_1)
@@ -66,6 +66,20 @@ describe('EnhancementSet', () => {
     expect(result.isSuperSetOf(set_1)).toBeTruthy()
     expect(result.isSuperSetOf(set_2)).toBeTruthy()
     expect([...result]).toEqual(numbers_1.concat(numbers_2))
+  })
+
+  it('should return an union of 3 Sets', () => {
+    const numbers_1 = [1, 2, 3, 4]
+    const numbers_2 = [5, 6, 7, 8]
+    const numbers_3 = [9, 10, 11, 12]
+    const set_1 = new ExtendedSet<number>(numbers_1)
+    const set_2 = new ExtendedSet<number>(numbers_2)
+    const set_3 = new ExtendedSet<number>(numbers_3)
+    const result = set_1.union(set_2, set_3)
+
+    expect(result.isSuperSetOf(set_1)).toBeTruthy()
+    expect(result.isSuperSetOf(set_2)).toBeTruthy()
+    expect([...result]).toEqual([...numbers_1, ...numbers_2, ...numbers_3])
   })
 
   it('should return an Array', () => {
