@@ -49,4 +49,47 @@ export default class ExtendedSet<T> extends Set<T> {
     }
     return result
   }
+
+  isSuperSetOf<TSubSet extends T>(other: Set<TSubSet>): boolean {
+    for (const item of other) {
+      if (!this.has(item)) return false
+    }
+    return true
+  }
+
+  union<TSubSet extends T>(...others: Set<TSubSet>[]): ExtendedSet<T> {
+    return this._unionSets([this, ...others])
+  }
+
+  intersection<TIntersectionSet extends T>(
+    other: Set<TIntersectionSet>,
+  ): ExtendedSet<T> {
+    const intersectionSet = new ExtendedSet<T>()
+    for (const item of other) {
+      if (this.has(item)) intersectionSet.add(item)
+    }
+    return intersectionSet
+  }
+
+  difference<TDifferenceSet extends T>(
+    other: Set<TDifferenceSet>,
+  ): ExtendedSet<T> {
+    const differenceSet = new ExtendedSet<T>()
+    for (const item of other) {
+      if (!this.has(item)) differenceSet.add(item)
+    }
+    return differenceSet
+  }
+
+  toArray(): T[] {
+    return [...this]
+  }
+
+  private _unionSets<TSubSet extends T>(others: Set<TSubSet>[]) {
+    const unionSets = new ExtendedSet<T>()
+    for (const set of others) {
+      for (const item of set) unionSets.add(item)
+    }
+    return unionSets
+  }
 }
