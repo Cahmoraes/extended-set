@@ -50,9 +50,16 @@ export default class ExtendedSet<T> extends Set<T> {
     return result
   }
 
-  isSuperSetOf<TSubSet extends T>(other: Set<TSubSet>): boolean {
+  isSuperSetOf<TSuperSet extends T>(other: Set<TSuperSet>): boolean {
     for (const item of other) {
       if (!this.has(item)) return false
+    }
+    return true
+  }
+
+  isSubSetOf(other: Set<T>): boolean {
+    for (const item of this) {
+      if (!other.has(item)) return false
     }
     return true
   }

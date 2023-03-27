@@ -68,6 +68,10 @@ const smallestNumber = set.reduce((acc, item) => (acc > item ? item : acc))
 console.log(smallestNumber) // 0
 ```
 
+---
+
+<br>
+
 ## toArray
 
 Create a new Array from Set.
@@ -106,6 +110,35 @@ const result = set_1.union(set_2)
 console.log(result) // true
 ```
 
+---
+
+<br>
+
+## isSubSetOf
+
+Check if Set is a subset of other set.
+Returns true if Set is a subset of other set. Else returns false.
+
+### property
+
+```ts
+- other: Set
+```
+
+### example
+
+```ts
+const set_1 = new ExtendedSet<number>([1, 2])
+const set_2 = new ExtendedSet<number>([1, 2, 3, 4])
+const result = set_1.isSubSetOf(set_2)
+
+console.log(result) // true
+```
+
+---
+
+<br>
+
 ## union
 
 Create new Set from an union of Sets.
@@ -127,6 +160,10 @@ const result = set_1.union(set_2, set_3)
 console.log(result) // Set {1, 2, 3, 4, 5, 6}
 ```
 
+---
+
+<br>
+
 ## intersection
 
 Create an intersection Set from Sets.
@@ -146,6 +183,10 @@ const result = set_1.intersection(set_2)
 
 console.log(result) // Set {1, 4}
 ```
+
+---
+
+<br>
 
 ## difference
 

@@ -56,6 +56,18 @@ describe('EnhancementSet', () => {
     expect(result).toBeFalsy()
   })
 
+  it('should return true when a Set is sub set of other set', () => {
+    const set = new ExtendedSet<number>([1, 2, 3, 4])
+    const result = set.isSubSetOf(new ExtendedSet<number>([1, 2, 4, 3]))
+    expect(result).toBeTruthy()
+  })
+
+  it('should return false when a Set is not sub set of other set', () => {
+    const set = new ExtendedSet<number>([1, 2, 3, 4])
+    const result = set.isSubSetOf(new ExtendedSet<number>([5, 2, 4]))
+    expect(result).toBeFalsy()
+  })
+
   it('should return an union of 2 Sets', () => {
     const numbers_1 = [1, 2, 3, 4]
     const numbers_2 = [5, 6, 7, 8]
