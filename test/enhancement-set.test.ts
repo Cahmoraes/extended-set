@@ -9,12 +9,9 @@ describe('EnhancementSet', () => {
 
   it('should return the minimum value of Set, as primitive value', () => {
     const set = new ExtendedSet<number>()
-    set.add(2).add(3).add(10)
-    const result = set.reduce((acc, item) => {
-      if (acc > item) return item
-      return acc
-    })
-    expect(result).toBe(2)
+    set.add(2).add(3).add(0).add(5).add(20)
+    const smallestNumber = set.reduce((acc, item) => (acc > item ? item : acc))
+    expect(smallestNumber).toBe(0)
   })
 
   it('should return the minimum value of Set,as nno-primitive value', () => {
