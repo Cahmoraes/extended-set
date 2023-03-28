@@ -79,7 +79,7 @@ Create a new Set from an array
 ### property
 
 ```ts
-;-anArray
+- anArray = []
 // Array to convert into Set
 ```
 
