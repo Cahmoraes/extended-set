@@ -1,6 +1,6 @@
 {
   "name": "@cahmoraes93/extended-set",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "author": "Cahmoraes <ike.moraes93@gmail.com>",
