@@ -7,6 +7,24 @@ describe('EnhancementSet', () => {
     expect(set).instanceOf(ExtendedSet)
   })
 
+  it('should create an EnhancementSet instance by static method of', () => {
+    const set = ExtendedSet.of([1, 2, 3, 4])
+    expect(set).instanceOf(ExtendedSet)
+    expect(set.has(3)).toBeTruthy()
+    console.log(set.toString())
+  })
+
+  it('should return a string literal', () => {
+    const set = ExtendedSet.of([1, 2, 3, 4])
+    expect(set).instanceOf(ExtendedSet)
+    expect(set.toString()).toBe('1,2,3,4')
+  })
+
+  it('should return a StringTag equals ExtendedSet', () => {
+    const set = ExtendedSet.of([1, 2, 3, 4])
+    expect(Object.prototype.toString.call(set)).includes('ExtendedSet')
+  })
+
   it('should return the minimum value of Set, as primitive value', () => {
     const set = new ExtendedSet<number>()
     set.add(2).add(3).add(0).add(5).add(20)

@@ -8,6 +8,10 @@ type CallbackReduce<InitialType, T> = (
 type CallbackMap<TInput, TOutput> = (arg: TInput) => TOutput
 
 export default class ExtendedSet<T> extends Set<T> {
+  static of<T>(anArray: T[]) {
+    return new ExtendedSet<T>(anArray)
+  }
+
   filter(callbackFilterFn: CallbackFilterFn<T>) {
     const filteredSet = new ExtendedSet<T>()
     for (const item of this) {
@@ -90,6 +94,14 @@ export default class ExtendedSet<T> extends Set<T> {
 
   toArray(): T[] {
     return [...this]
+  }
+
+  get [Symbol.toStringTag]() {
+    return 'ExtendedSet'
+  }
+
+  toString() {
+    return [...this].join()
   }
 
   private _unionSets<TSubSet extends T>(others: Set<TSubSet>[]) {
