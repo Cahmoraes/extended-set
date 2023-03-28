@@ -72,6 +72,28 @@ console.log(smallestNumber) // 0
 
 <br>
 
+## of
+
+Create a new Set from an array
+
+### property
+
+```ts
+;-anArray
+// Array to convert into Set
+```
+
+### example
+
+```ts
+const set = ExtendedSet.of([1, 2, 3])
+console.log(set.toString()) // 1,2,3
+```
+
+---
+
+<br>
+
 ## toArray
 
 Create a new Array from Set.
