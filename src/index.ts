@@ -1,19 +1,21 @@
-type CallbackFilterFn<T> = (args: T) => boolean
+type CallbackFilter<Type> = (args: Type) => boolean
 
-type CallbackReduce<InitialType, T> = (
+type CallbackReduce<InitialType, Type> = (
   previousValue: InitialType,
-  currentValue: T,
+  currentValue: Type,
 ) => InitialType
+
+type CallbackFind<Type> = (item: Type) => boolean
 
 type CallbackMap<TInput, TOutput> = (arg: TInput) => TOutput
 
-export default class ExtendedSet<T> extends Set<T> {
-  static of<T>(anArray: T[]) {
-    return new ExtendedSet<T>(anArray)
+export default class ExtendedSet<Type> extends Set<Type> {
+  static of<Type>(anArray: Type[]) {
+    return new ExtendedSet<Type>(anArray)
   }
 
-  filter(callbackFilterFn: CallbackFilterFn<T>) {
-    const filteredSet = new ExtendedSet<T>()
+  public filter(callbackFilterFn: CallbackFilter<Type>) {
+    const filteredSet = new ExtendedSet<Type>()
     for (const item of this) {
       if (!callbackFilterFn(item)) continue
       filteredSet.add(item)
@@ -21,12 +23,12 @@ export default class ExtendedSet<T> extends Set<T> {
     return filteredSet
   }
 
-  reduce(callbackReduce: CallbackReduce<T, T>): T
-  reduce<InitialType>(
-    callbackReduce: CallbackReduce<InitialType, T>,
+  public reduce(callbackReduce: CallbackReduce<Type, Type>): Type
+  public reduce<InitialType>(
+    callbackReduce: CallbackReduce<InitialType, Type>,
     initialValue: InitialType,
   ): InitialType
-  reduce(...args: any[]) {
+  public reduce(...args: any[]) {
     const [callbackReduce, initialValue] = args
     if (isInvalidInitialValue()) {
       const [first, ...restSet] = this
@@ -37,7 +39,7 @@ export default class ExtendedSet<T> extends Set<T> {
     function isInvalidInitialValue(): boolean {
       return initialValue === undefined || initialValue === null
     }
-    function internalReduce(set: Set<T> | T[], initialValue: any) {
+    function internalReduce(set: Set<Type> | Type[], initialValue: any) {
       let result = initialValue
       for (const item of set) {
         result = callbackReduce(result, item)
@@ -46,7 +48,9 @@ export default class ExtendedSet<T> extends Set<T> {
     }
   }
 
-  map<TOutput>(callback: CallbackMap<T, TOutput>) {
+  public map<TOutput>(
+    callback: CallbackMap<Type, TOutput>,
+  ): ExtendedSet<TOutput> {
     const result = new ExtendedSet<TOutput>()
     for (const item of this) {
       result.add(callback(item))
@@ -54,45 +58,62 @@ export default class ExtendedSet<T> extends Set<T> {
     return result
   }
 
-  isSuperSetOf<TSuperSet extends T>(other: Set<TSuperSet>): boolean {
+  public find(callback: CallbackFind<Type>): Type | null {
+    for (const item of this) {
+      if (callback(item)) return item
+    }
+    return null
+  }
+
+  public isSuperSetOf<TSuperSet extends Type>(other: Set<TSuperSet>): boolean {
     for (const item of other) {
       if (!this.has(item)) return false
     }
     return true
   }
 
-  isSubSetOf(other: Set<T>): boolean {
+  public isSubSetOf(other: Set<Type>): boolean {
     for (const item of this) {
       if (!other.has(item)) return false
     }
     return true
   }
 
-  union<TSubSet extends T>(...others: Set<TSubSet>[]): ExtendedSet<T> {
-    return this._unionSets([this, ...others])
+  public union<TSubSet extends Type>(
+    ...others: Set<TSubSet>[]
+  ): ExtendedSet<Type> {
+    return this.performUnionSets([this, ...others])
   }
 
-  intersection<TIntersectionSet extends T>(
+  private performUnionSets<TSubSet extends Type>(others: Set<TSubSet>[]) {
+    const unionSets = new ExtendedSet<Type>()
+    for (const set of others) {
+      for (const item of set) unionSets.add(item)
+    }
+    return unionSets
+  }
+
+  public intersection<TIntersectionSet extends Type>(
     other: Set<TIntersectionSet>,
-  ): ExtendedSet<T> {
-    const intersectionSet = new ExtendedSet<T>()
+  ): ExtendedSet<Type> {
+    const intersectionSet = new ExtendedSet<Type>()
     for (const item of other) {
       if (this.has(item)) intersectionSet.add(item)
     }
     return intersectionSet
   }
 
-  difference<TDifferenceSet extends T>(
+  public difference<TDifferenceSet extends Type>(
     other: Set<TDifferenceSet>,
-  ): ExtendedSet<T> {
-    const differenceSet = new ExtendedSet<T>()
+  ): ExtendedSet<Type> {
+    const differenceSet = new ExtendedSet<Type>()
     for (const item of other) {
       if (!this.has(item)) differenceSet.add(item)
     }
     return differenceSet
   }
 
-  toArray(): T[] {
+  public toArray(): Type[] {
     return [...this]
   }
 
@@ -100,15 +121,7 @@ export default class ExtendedSet<T> extends Set<T> {
     return 'ExtendedSet'
   }
 
-  toString() {
+  public toString() {
     return [...this].join()
-  }
-
-  private _unionSets<TSubSet extends T>(others: Set<TSubSet>[]) {
-    const unionSets = new ExtendedSet<T>()
-    for (const set of others) {
-      for (const item of set) unionSets.add(item)
-    }
-    return unionSets
   }
 }

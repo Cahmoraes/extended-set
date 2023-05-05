@@ -72,6 +72,33 @@ console.log(smallestNumber) // 0
 
 <br>
 
+## find
+
+Find an item in Set. Returns the item or null.
+
+### property
+
+```ts
+- callback: (item: Type) => boolean
+```
+
+### example
+
+```ts
+const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
+const set = ExtendedSet.of(users)
+
+const findGeorge = set.find((item) => item.name === 'George')
+console.log(findGeorge) // { name: 'George' }
+
+const findAnnie = set.find((item) => item.name === 'Annie')
+console.log(findAnnie) // null
+```
+
+---
+
+<br>
+
 ## of
 
 Create a new Set from an array
