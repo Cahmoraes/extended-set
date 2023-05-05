@@ -1,21 +1,23 @@
-type CallbackFilterFn<T> = (args: T) => boolean;
-type CallbackReduce<InitialType, T> = (previousValue: InitialType, currentValue: T) => InitialType;
+type CallbackFilter<Type> = (args: Type) => boolean;
+type CallbackReduce<InitialType, Type> = (previousValue: InitialType, currentValue: Type) => InitialType;
+type CallbackFind<Type> = (item: Type) => boolean;
 type CallbackMap<TInput, TOutput> = (arg: TInput) => TOutput;
-declare class ExtendedSet<T> extends Set<T> {
-    static of<T>(anArray: T[]): ExtendedSet<T>;
-    filter(callbackFilterFn: CallbackFilterFn<T>): ExtendedSet<T>;
-    reduce(callbackReduce: CallbackReduce<T, T>): T;
-    reduce<InitialType>(callbackReduce: CallbackReduce<InitialType, T>, initialValue: InitialType): InitialType;
-    map<TOutput>(callback: CallbackMap<T, TOutput>): ExtendedSet<TOutput>;
-    isSuperSetOf<TSuperSet extends T>(other: Set<TSuperSet>): boolean;
-    isSubSetOf(other: Set<T>): boolean;
-    union<TSubSet extends T>(...others: Set<TSubSet>[]): ExtendedSet<T>;
-    intersection<TIntersectionSet extends T>(other: Set<TIntersectionSet>): ExtendedSet<T>;
-    difference<TDifferenceSet extends T>(other: Set<TDifferenceSet>): ExtendedSet<T>;
-    toArray(): T[];
+declare class ExtendedSet<Type> extends Set<Type> {
+    static of<Type>(anArray: Type[]): ExtendedSet<Type>;
+    filter(callbackFilterFn: CallbackFilter<Type>): ExtendedSet<Type>;
+    reduce(callbackReduce: CallbackReduce<Type, Type>): Type;
+    reduce<InitialType>(callbackReduce: CallbackReduce<InitialType, Type>, initialValue: InitialType): InitialType;
+    map<TOutput>(callback: CallbackMap<Type, TOutput>): ExtendedSet<TOutput>;
+    find(callback: CallbackFind<Type>): Type | null;
+    isSuperSetOf<TSuperSet extends Type>(other: Set<TSuperSet>): boolean;
+    isSubSetOf(other: Set<Type>): boolean;
+    union<TSubSet extends Type>(...others: Set<TSubSet>[]): ExtendedSet<Type>;
+    private performUnionSets;
+    intersection<TIntersectionSet extends Type>(other: Set<TIntersectionSet>): ExtendedSet<Type>;
+    difference<TDifferenceSet extends Type>(other: Set<TDifferenceSet>): ExtendedSet<Type>;
+    toArray(): Type[];
     get [Symbol.toStringTag](): string;
     toString(): string;
-    private _unionSets;
 }
 
 export { ExtendedSet as default };
