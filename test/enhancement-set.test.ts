@@ -142,22 +142,20 @@ describe('EnhancementSet', () => {
     expect(result.toArray()).toEqual([5, 8])
   })
 
-  describe('find', () => {
-    it('should to find an element in Set', () => {
-      const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
-      const set = ExtendedSet.of(users)
+  it('should to find an element in Set', () => {
+    const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
+    const set = ExtendedSet.of(users)
 
-      const findGeorge = set.find((item) => item.name === 'George')
+    const findGeorge = set.find((item) => item.name === 'George')
 
-      expect(findGeorge).toContain({ name: 'George' })
-    })
+    expect(findGeorge).toContain({ name: 'George' })
+  })
 
-    it('should return null when find for a non existing item', () => {
-      const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
-      const set = ExtendedSet.of(users)
+  it('should return null when find for a non existing item', () => {
+    const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
+    const set = ExtendedSet.of(users)
 
-      const nullItem = set.find((item) => item.name === 'non-existing')
-      expect(nullItem).toBe(null)
-    })
+    const nullItem = set.find((item) => item.name === 'non-existing')
+    expect(nullItem).toBe(null)
   })
 })
