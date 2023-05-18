@@ -142,20 +142,54 @@ describe('EnhancementSet', () => {
     expect(result.toArray()).toEqual([5, 8])
   })
 
-  it('should to find an element in Set', () => {
-    const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
-    const set = ExtendedSet.of(users)
+  describe('#find', () => {
+    it('should to find an element in Set', () => {
+      const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
+      const set = ExtendedSet.of(users)
 
-    const findGeorge = set.find((item) => item.name === 'George')
+      const findGeorge = set.find((item) => item.name === 'George')
 
-    expect(findGeorge).toContain({ name: 'George' })
+      expect(findGeorge).toContain({ name: 'George' })
+    })
+
+    it('should return null when find for a non existing item', () => {
+      const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
+      const set = ExtendedSet.of(users)
+
+      const nullItem = set.find((item) => item.name === 'non-existing')
+      expect(nullItem).toBe(null)
+    })
   })
 
-  it('should return null when find for a non existing item', () => {
-    const users = [{ name: 'John' }, { name: 'George' }, { name: 'Jackie' }]
-    const set = ExtendedSet.of(users)
+  describe('#every', () => {
+    it('should return true when every element in Set is truthy', () => {
+      const numbersGreaterThanZero = [1, 2, 3, 4]
+      const set = ExtendedSet.of(numbersGreaterThanZero)
+      const result = set.every((item) => item > 0)
+      expect(result).toBeTruthy()
+    })
 
-    const nullItem = set.find((item) => item.name === 'non-existing')
-    expect(nullItem).toBe(null)
+    it('should return false when some element in Set is falsy', () => {
+      const numbersGreaterThanZero = [1, 2, -3, 4]
+      const set = ExtendedSet.of(numbersGreaterThanZero)
+      const result = set.every((item) => item > 0)
+      expect(result).toBeFalsy()
+    })
+  })
+
+  describe('#some', () => {
+    it('should return true when some element in Set is truthy', () => {
+      const numbersGreaterThanZero = [1, -2, 3, 4]
+      const set = ExtendedSet.of(numbersGreaterThanZero)
+      const result = set.some((item) => item < 0)
+      expect(result).toBeTruthy()
+    })
+
+    it('should return false when some element in Set is falsy', () => {
+      const numbersGreaterThanZero = [1, 2, 3, 4]
+      const set = ExtendedSet.of(numbersGreaterThanZero)
+      const result = set.some((item) => item < 0)
+      expect(result).toBeFalsy()
+    })
   })
 })

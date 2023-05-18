@@ -99,6 +99,60 @@ console.log(findAnnie) // null
 
 <br>
 
+## every
+
+Return true when every element in Set is truthy, else return false
+
+### property
+
+```ts
+- callback: (item: Type) => boolean
+```
+
+### example
+
+```ts
+const users = [1, 2, 3]
+const set = ExtendedSet.of(users)
+
+const numbersAreGreaterThanZero = set.every((number) => number > 0)
+console.log(numbersAreGreaterTahZero) // true
+
+const numbersAreLessThanZero = set.every((number) => number < 0)
+console.log(numbersAreLessThanZero) // false
+```
+
+---
+
+<br>
+
+## some
+
+Return true when some element in Set is truthy, else return false
+
+### property
+
+```ts
+- callback: (item: Type) => boolean
+```
+
+### example
+
+```ts
+const numbers = [1, -2, 3, 4]
+const set = ExtendedSet.of(numbers)
+
+const isThereNumberLessThanZero = set.some((item) => item < 0)
+console.log(isThereNumberLessThanZero) // true
+
+const isThereNumberEqualsZero = set.some((item) => item === 0)
+console.log(isThereNumberEqualsZero) // false
+```
+
+---
+
+<br>
+
 ## of
 
 Create a new Set from an array

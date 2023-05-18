@@ -6,7 +6,8 @@ type CallbackReduce<InitialType, Type> = (
 ) => InitialType
 
 type CallbackFind<Type> = (item: Type) => boolean
-
+type CallbackEvery<Type> = CallbackFind<Type>
+type CallbackSome<Type> = CallbackFind<Type>
 type CallbackMap<TInput, TOutput> = (arg: TInput) => TOutput
 
 export default class ExtendedSet<Type> extends Set<Type> {
@@ -63,6 +64,20 @@ export default class ExtendedSet<Type> extends Set<Type> {
       if (callback(item)) return item
     }
     return null
+  }
+
+  public every(callback: CallbackEvery<Type>): boolean {
+    for (const item of this) {
+      if (!callback(item)) return false
+    }
+    return true
+  }
+
+  public some(callback: CallbackSome<Type>): boolean {
+    for (const item of this) {
+      if (callback(item)) return true
+    }
+    return false
   }
 
   public isSuperSetOf<TSuperSet extends Type>(other: Set<TSuperSet>): boolean {
