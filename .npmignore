@@ -8,3 +8,5 @@ vite.config.ts
 test/
 src/
 .eslintrc.json
+.eslintrc.js
+.prettierrc.json
