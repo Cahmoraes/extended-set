@@ -149,7 +149,7 @@ describe('EnhancementSet', () => {
 
       const findGeorge = set.find((item) => item.name === 'George')
 
-      expect(findGeorge).toContain({ name: 'George' })
+      expect(findGeorge).contain({ name: 'George' })
     })
 
     it('should return null when find for a non existing item', () => {
